@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:studentrecord/Admin/application/provider/provider.dart';
 import 'package:studentrecord/Admin/domain/entities/materia_de_trayecto_academico.dart';
+import 'package:studentrecord/Admin/domain/entities/movement_type.dart';
 import 'package:studentrecord/Admin/domain/entities/movimiento_de_trayecto_academico.dart';
 import 'package:studentrecord/Admin/domain/entities/nota.dart';
 import 'package:studentrecord/Admin/domain/entities/user.dart';
@@ -14,17 +15,6 @@ class StudentRecordPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(getProductData);
-    var items = [
-      "cargaInicialRegularidad",
-      "cargaInicialAcreditacion",
-      "equivalencia",
-      "pase",
-      "regularidad",
-      "acreditacionDirecta",
-      "acreditacionEnMesaFinal"
-    ];
-    var notas = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
-
     return MaterialApp(
         title: "StudentRecord",
         home: Scaffold(
@@ -41,14 +31,15 @@ class StudentRecordPage extends ConsumerWidget {
                     child: Column(
                   children: [
                     Text("Nota final ${nota.getNota()}"),
-                    elementListItems(data, "Tipos de movimientos: ", items),
-                    elementListItems(data, "Notas: ", notas),
+                    // elementListItems(data, "Tipos de movimientos: ", items),
+                    // elementListItems(data, "Notas: ", notas),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
                             onPressed: () {
                               materia.addMovement(MovimientoDeTrayectoAcademico(
+                                  tipo: MovementTypes.comienzoCursado,
                                   fecha: "fecha",
                                   responsable: IESUser(
                                       firstname: "firstname",

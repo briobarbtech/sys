@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:studentrecord/Admin/application/pages/assignature_list.dart';
-import 'package:studentrecord/Admin/application/pages/student_record_page_copy.dart';
+import 'package:studentrecord/Admin/application/pages/profile.dart';
+//import 'package:studentrecord/Admin/application/pages/student_record_page_copy.dart';
 import 'package:studentrecord/Admin/application/provider/provider.dart';
 
 class Home extends ConsumerWidget {
@@ -13,7 +14,11 @@ class Home extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(actions: const [BackButton()]),
       body: data.when(
-          data: (data) => Center(child: AssignatureList(getProductData)),
+          data: (data) => Center(
+                  child: Column(children: [
+                ProfileStudent(data.student),
+                AssignatureList(getProductData)
+              ])),
           error: (e, s) => const Center(
                 child: Text("Ups!"),
               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:studentrecord/Admin/application/pages/home.dart';
-import 'package:studentrecord/Admin/application/pages/student_record_page_copy.dart';
+//import 'package:studentrecord/Admin/application/pages/student_record_page_copy.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));

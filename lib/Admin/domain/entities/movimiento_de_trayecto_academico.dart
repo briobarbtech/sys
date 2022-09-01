@@ -1,3 +1,4 @@
+import 'package:studentrecord/Admin/domain/entities/movement_type.dart';
 import 'package:studentrecord/Admin/domain/entities/nota.dart';
 import 'dart:convert';
 
@@ -12,30 +13,32 @@ String movimientoDeTrayectoAcademicoToJson(
     json.encode(data.toJson());
 
 class MovimientoDeTrayectoAcademico {
-  MovimientoDeTrayectoAcademico({
-    required this.fecha,
-    required this.responsable,
-    required this.valor,
-    required this.fechaCaducidadRegularidad,
-  });
+  MovimientoDeTrayectoAcademico(
+      {required this.fecha,
+      required this.responsable,
+      required this.valor,
+      required this.fechaCaducidadRegularidad,
+      required this.tipo});
 
   String fecha;
   String fechaCaducidadRegularidad;
   IESUser responsable;
-  Nota valor;
+  Nota valor; // Puede no  tener nota
+  Enum tipo;
 
   factory MovimientoDeTrayectoAcademico.fromJson(Map<String, dynamic> json) =>
       MovimientoDeTrayectoAcademico(
-        fechaCaducidadRegularidad: json["fechaDeCaducidad"],
-        fecha: json["fecha"],
-        responsable: json["responsable"],
-        valor: json["valor"],
-      );
+          fechaCaducidadRegularidad: json["fechaDeCaducidad"],
+          fecha: json["fecha"],
+          responsable: json["responsable"],
+          valor: json["valor"],
+          tipo: json["tipo"]);
 
   Map<String, dynamic> toJson() => {
         "fecha": fecha,
         "responsable": responsable,
         "valor": valor,
+        "tipo": tipo
       };
 
   getNota() {
@@ -43,22 +46,13 @@ class MovimientoDeTrayectoAcademico {
   }
 }
 
-enum MovementTypes {
-  cargaInicialRegularidad,
-  cargaInicialAcreditacion,
-  equivalencia,
-  pase,
-  regularidad,
-  acreditacionDirecta,
-  acreditacionEnMesaFinal
-}
-
 class CargaInicialRegularidad extends MovimientoDeTrayectoAcademico {
   CargaInicialRegularidad(
       {required super.fecha,
       required super.responsable,
       required super.valor,
-      required super.fechaCaducidadRegularidad});
+      required super.fechaCaducidadRegularidad,
+      super.tipo = MovementTypes.cargaInicialRegularidad});
 }
 
 class CargaInicialAcreditacion extends MovimientoDeTrayectoAcademico {
@@ -66,7 +60,8 @@ class CargaInicialAcreditacion extends MovimientoDeTrayectoAcademico {
       {required super.fecha,
       required super.responsable,
       required super.valor,
-      required super.fechaCaducidadRegularidad});
+      required super.fechaCaducidadRegularidad,
+      super.tipo = MovementTypes.acreditacionDirecta});
 }
 
 class Equivalencia extends MovimientoDeTrayectoAcademico {
@@ -76,20 +71,23 @@ class Equivalencia extends MovimientoDeTrayectoAcademico {
       required super.responsable,
       required super.valor,
       required super.fechaCaducidadRegularidad,
-      required this.centroEducativo});
+      required this.centroEducativo,
+      super.tipo = MovementTypes.equivalencia});
 
   factory Equivalencia.fromJson(Map<String, dynamic> json) => Equivalencia(
       fecha: json["fecha"],
       responsable: json["responsable"],
       valor: json["valor"],
       centroEducativo: json["centroEducativo"],
-      fechaCaducidadRegularidad: json["fechaCaducidadRegularidad"]);
+      fechaCaducidadRegularidad: json["fechaCaducidadRegularidad"],
+      tipo: json["tipo"]);
   @override
   Map<String, dynamic> toJson() => {
         "fecha": fecha,
         "responsable": responsable,
         "valor": valor,
-        "centroEducativo": centroEducativo
+        "centroEducativo": centroEducativo,
+        "tipo": tipo
       };
 }
 
@@ -98,7 +96,8 @@ class Pase extends MovimientoDeTrayectoAcademico {
       {required super.fecha,
       required super.responsable,
       required super.valor,
-      required super.fechaCaducidadRegularidad});
+      required super.fechaCaducidadRegularidad,
+      super.tipo = MovementTypes.pase});
 }
 
 class ComienzoDeCursado extends MovimientoDeTrayectoAcademico {
@@ -106,7 +105,8 @@ class ComienzoDeCursado extends MovimientoDeTrayectoAcademico {
       {required super.fecha,
       required super.responsable,
       required super.valor,
-      required super.fechaCaducidadRegularidad});
+      required super.fechaCaducidadRegularidad,
+      super.tipo = MovementTypes.comienzoCursado});
 }
 
 class Regularidad extends MovimientoDeTrayectoAcademico {
@@ -116,19 +116,22 @@ class Regularidad extends MovimientoDeTrayectoAcademico {
       required super.responsable,
       required super.valor,
       required super.fechaCaducidadRegularidad,
-      required this.cursado});
+      required this.cursado,
+      super.tipo = MovementTypes.regularidad});
   factory Regularidad.fromJson(Map<String, dynamic> json) => Regularidad(
       fecha: json["fecha"],
       responsable: json["responsable"],
       valor: json["valor"],
       fechaCaducidadRegularidad: json["fechaCaducidadMateria"],
-      cursado: json["cursado"]);
+      cursado: json["cursado"],
+      tipo: json["tipo"]);
   @override
   Map<String, dynamic> toJson() => {
         "fecha": fecha,
         "responsable": responsable,
         "valor": valor,
-        "cursado": cursado
+        "cursado": cursado,
+        "tipo": tipo
       };
 }
 
@@ -137,7 +140,8 @@ class AcreditacionDirecta extends MovimientoDeTrayectoAcademico {
       {required super.fecha,
       required super.responsable,
       required super.valor,
-      required super.fechaCaducidadRegularidad});
+      required super.fechaCaducidadRegularidad,
+      super.tipo = MovementTypes.acreditacionDirecta});
 }
 
 class AcreditacionEnMesaFinal extends MovimientoDeTrayectoAcademico {
@@ -145,5 +149,6 @@ class AcreditacionEnMesaFinal extends MovimientoDeTrayectoAcademico {
       {required super.fecha,
       required super.responsable,
       required super.valor,
-      required super.fechaCaducidadRegularidad});
+      required super.fechaCaducidadRegularidad,
+      super.tipo = MovementTypes.acreditacionEnMesaFinal});
 }

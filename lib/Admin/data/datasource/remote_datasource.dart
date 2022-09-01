@@ -1,4 +1,5 @@
 import 'package:studentrecord/Admin/domain/entities/materia_de_trayecto_academico.dart';
+import 'package:studentrecord/Admin/domain/entities/movement_type.dart';
 import 'package:studentrecord/Admin/domain/entities/movimiento_de_trayecto_academico.dart';
 import 'package:studentrecord/Admin/domain/entities/nota.dart';
 import 'package:studentrecord/Admin/domain/entities/student.dart';
@@ -24,6 +25,7 @@ class RemoteDatasourceFake implements IRemoteDatasource {
     // Creamos un movimiento para Lengua
     MovimientoDeTrayectoAcademico lenguaRegistro =
         MovimientoDeTrayectoAcademico(
+      tipo: MovementTypes.equivalencia,
       fechaCaducidadRegularidad: "20-10-1998",
       responsable: brian,
       valor: Nota(valor: 10),

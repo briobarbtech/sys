@@ -16,8 +16,10 @@ class ProfileStudent extends StatelessWidget {
           // Usamos ListTile para ordenar la información del card como titulo, subtitulo e icono
           ListTile(
             contentPadding: const EdgeInsets.fromLTRB(15, 10, 25, 0),
-            title: Text(student.user.firstname),
-            subtitle: Text(student.user.surname),
+            title: Text("${student.user.firstname} ${student.user.surname}"),
+            subtitle: Column(children: [
+              Text("Fecha de nacimiento: ${student.user.birthdate.toString()}")
+            ]),
             leading: const Icon(Icons.account_circle),
           ),
         ],

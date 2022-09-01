@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studentrecord/Admin/domain/entities/materia_de_trayecto_academico.dart';
+import 'package:studentrecord/Admin/domain/entities/movement_type.dart';
+import 'package:studentrecord/Admin/domain/entities/movimiento_de_trayecto_academico.dart';
 
 class FormMateria extends StatelessWidget {
   final MateriaDeTrayectoAcademico materia;
@@ -7,18 +9,22 @@ class FormMateria extends StatelessWidget {
   const FormMateria(this.materia, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var list = ['Equivalencia', "Acreditación directa"];
     GlobalKey keyForm = GlobalKey();
-    TextEditingController typeOfMove = TextEditingController(materia.);
+    TextEditingController typeOfMove = TextEditingController();
     TextEditingController newNota = TextEditingController();
     return Scaffold(
       body: Center(
-        child: Center(child: Form(child: elementListItems())),
+        child: Center(
+            child: Form(
+                child: elementListItems("Tipos de movimiento",
+                    MovementType.movementTypes, typeOfMove))),
       ),
     );
   }
 }
 
-Widget elementListItems(data, title, list) {
+Widget elementListItems(title, list, tipo) {
   var items = list;
   var dropdownValue = items.first;
 
@@ -27,7 +33,7 @@ Widget elementListItems(data, title, list) {
     const SizedBox(
       width: 20.0,
     ),
-    DropdownButton<String>(
+    DropdownButton<MovementType>(
       value: dropdownValue,
       icon: const Icon(Icons.arrow_drop_down),
       elevation: 16,
@@ -36,13 +42,14 @@ Widget elementListItems(data, title, list) {
         height: 2,
         color: Colors.blueAccent,
       ),
-      onChanged: (String? newValue) {
-        dropdownValue = newValue!;
+      onChanged: (MovementType? movement) {
+        tipo = movement;
+        dropdownValue = movement;
       },
-      items: items.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
+      items: items.map<DropdownMenuItem<MovementType>>((MovementType value) {
+        return DropdownMenuItem<MovementType>(
           value: value,
-          child: Text(value),
+          child: Text(value.description),
         );
       }).toList(),
     ),

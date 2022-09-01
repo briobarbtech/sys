@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:studentrecord/Admin/application/pages/assignature_list.dart';
+import 'package:studentrecord/Admin/application/pages/form_materia.dart';
 import 'package:studentrecord/Admin/application/pages/profile.dart';
 import 'package:studentrecord/Admin/application/provider/provider.dart';
 import 'package:studentrecord/Admin/domain/entities/materia_de_trayecto_academico.dart';
@@ -37,7 +38,9 @@ class StudentRecordPage extends ConsumerWidget {
                     ElevatedButton(
                         onPressed: () {
                           Navigator.push(
-                              context, MaterialPageRoute(builder: (context)=>  ));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FormMateria(materia)));
                         },
                         child: const Text("Editar"))
                   ],

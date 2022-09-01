@@ -20,6 +20,10 @@ class MateriaDeTrayectoAcademico {
     return movimientosDeTrayectoAcademico.last;
   }
 
+  getTipo() {
+    return movimientosDeTrayectoAcademico.last.tipo;
+  }
+
   createMovement(
     movementType,
     point,
