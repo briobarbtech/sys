@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:studentrecord/Admin/domain/entities/materia_de_trayecto_academico.dart';
+import 'package:studentrecord/Admin/domain/entities/subject_student_record.dart';
 import 'package:studentrecord/Admin/domain/entities/movement_type.dart';
 import 'package:studentrecord/Admin/domain/entities/movimiento_de_trayecto_academico.dart';
 
 class FormMateria extends StatelessWidget {
-  final MateriaDeTrayectoAcademico materia;
+  final SubjectStudentRecord materia;
 
   const FormMateria(this.materia, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var list = ['Equivalencia', "Acreditación directa"];
     GlobalKey keyForm = GlobalKey();
     TextEditingController typeOfMove = TextEditingController();
     TextEditingController newNota = TextEditingController();

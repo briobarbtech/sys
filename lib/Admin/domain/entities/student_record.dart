@@ -1,22 +1,22 @@
-import 'package:studentrecord/Admin/domain/entities/materia_de_trayecto_academico.dart';
+import 'package:studentrecord/Admin/domain/entities/subject_student_record.dart';
 import '../../domain/entities/student.dart';
 
 class StudentRecord {
   Student student;
-  List<MateriaDeTrayectoAcademico> materias = [];
+  List<SubjectStudentRecord> materias = [];
 
   StudentRecord({
     required this.student,
   });
 
-  addMateria(MateriaDeTrayectoAcademico materia) {
+  addMateria(SubjectStudentRecord materia) {
     materias.add(materia);
   }
 
   getMateria(String id) {
-    late MateriaDeTrayectoAcademico materiaFound;
+    late SubjectStudentRecord materiaFound;
     for (var materia in materias) {
-      if (materia.idMateria == id) {
+      if (materia.subjectId == id) {
         materiaFound = materia;
       }
     }

@@ -1,7 +1,7 @@
-import 'package:studentrecord/Admin/domain/entities/materia_de_trayecto_academico.dart';
+import 'package:studentrecord/Admin/domain/entities/subject_student_record.dart';
 import 'package:studentrecord/Admin/domain/entities/movement_type.dart';
 import 'package:studentrecord/Admin/domain/entities/movimiento_de_trayecto_academico.dart';
-import 'package:studentrecord/Admin/domain/entities/nota.dart';
+import 'package:studentrecord/Admin/domain/entities/point.dart';
 import 'package:studentrecord/Admin/domain/entities/student.dart';
 import 'package:studentrecord/Admin/domain/entities/student_record.dart';
 import 'package:studentrecord/Admin/domain/entities/user.dart';
@@ -20,16 +20,16 @@ class RemoteDatasourceFake implements IRemoteDatasource {
     // Creamos un estudiante con el usuario Brian
     Student brianStudent = Student(user: brian);
     // Creamos un trayecto para la materia lengua
-    MateriaDeTrayectoAcademico lengua = MateriaDeTrayectoAcademico(
-        estado: 'Regular', idMateria: '1234', nombre: 'Lengua');
+    SubjectStudentRecord lengua = SubjectStudentRecord(
+        subjectState: 'Regular', subjectId: '1234', subjectName: 'Lengua');
     // Creamos un movimiento para Lengua
     MovimientoDeTrayectoAcademico lenguaRegistro =
         MovimientoDeTrayectoAcademico(
-      tipo: MovementTypes.equivalencia,
-      fechaCaducidadRegularidad: "20-10-1998",
-      responsable: brian,
-      valor: Nota(valor: 10),
-      fecha: '20/10/1998',
+      type: MovementTypes.equivalencia,
+      expirationDate: "20-10-1998",
+      responsible: brian,
+      value: Point(value: 10),
+      initialDate: '20/10/1998',
     );
     // Agregamos el movimiento de la materia Lengua a la materia de Brian
     lengua.addMovement(lenguaRegistro);

@@ -1,5 +1,5 @@
 import 'package:studentrecord/Admin/domain/entities/movement_type.dart';
-import 'package:studentrecord/Admin/domain/entities/nota.dart';
+import 'package:studentrecord/Admin/domain/entities/point.dart';
 import 'dart:convert';
 
 import 'package:studentrecord/Admin/domain/entities/user.dart';
@@ -14,141 +14,141 @@ String movimientoDeTrayectoAcademicoToJson(
 
 class MovimientoDeTrayectoAcademico {
   MovimientoDeTrayectoAcademico(
-      {required this.fecha,
-      required this.responsable,
-      required this.valor,
-      required this.fechaCaducidadRegularidad,
-      required this.tipo});
+      {required this.initialDate,
+      required this.responsible,
+      required this.value,
+      required this.expirationDate,
+      required this.type});
 
-  String fecha;
-  String fechaCaducidadRegularidad;
-  IESUser responsable;
-  Nota valor; // Puede no  tener nota
-  Enum tipo;
+  String initialDate;
+  String expirationDate;
+  IESUser responsible;
+  Point value; // Puede no  tener Point
+  Enum type;
 
   factory MovimientoDeTrayectoAcademico.fromJson(Map<String, dynamic> json) =>
       MovimientoDeTrayectoAcademico(
-          fechaCaducidadRegularidad: json["fechaDeCaducidad"],
-          fecha: json["fecha"],
-          responsable: json["responsable"],
-          valor: json["valor"],
-          tipo: json["tipo"]);
+          expirationDate: json["expirationDate"],
+          initialDate: json["fecha"],
+          responsible: json["responsible"],
+          value: json["value"],
+          type: json["type"]);
 
   Map<String, dynamic> toJson() => {
-        "fecha": fecha,
-        "responsable": responsable,
-        "valor": valor,
-        "tipo": tipo
+        "initialDate": initialDate,
+        "responsible": responsible,
+        "value": value,
+        "type": type
       };
 
-  getNota() {
-    return valor.valor;
+  getPoint() {
+    return value.value;
   }
 }
 
 class CargaInicialRegularidad extends MovimientoDeTrayectoAcademico {
   CargaInicialRegularidad(
-      {required super.fecha,
-      required super.responsable,
-      required super.valor,
-      required super.fechaCaducidadRegularidad,
-      super.tipo = MovementTypes.cargaInicialRegularidad});
+      {required super.initialDate,
+      required super.responsible,
+      required super.value,
+      required super.expirationDate,
+      super.type = MovementTypes.cargaInicialRegularidad});
 }
 
 class CargaInicialAcreditacion extends MovimientoDeTrayectoAcademico {
   CargaInicialAcreditacion(
-      {required super.fecha,
-      required super.responsable,
-      required super.valor,
-      required super.fechaCaducidadRegularidad,
-      super.tipo = MovementTypes.acreditacionDirecta});
+      {required super.initialDate,
+      required super.responsible,
+      required super.value,
+      required super.expirationDate,
+      super.type = MovementTypes.acreditacionDirecta});
 }
 
 class Equivalencia extends MovimientoDeTrayectoAcademico {
   String centroEducativo;
   Equivalencia(
-      {required super.fecha,
-      required super.responsable,
-      required super.valor,
-      required super.fechaCaducidadRegularidad,
+      {required super.initialDate,
+      required super.responsible,
+      required super.value,
+      required super.expirationDate,
       required this.centroEducativo,
-      super.tipo = MovementTypes.equivalencia});
+      super.type = MovementTypes.equivalencia});
 
   factory Equivalencia.fromJson(Map<String, dynamic> json) => Equivalencia(
-      fecha: json["fecha"],
-      responsable: json["responsable"],
-      valor: json["valor"],
+      initialDate: json["initialDate"],
+      responsible: json["responsible"],
+      value: json["value"],
       centroEducativo: json["centroEducativo"],
-      fechaCaducidadRegularidad: json["fechaCaducidadRegularidad"],
-      tipo: json["tipo"]);
+      expirationDate: json["expirationDate"],
+      type: json["type"]);
   @override
   Map<String, dynamic> toJson() => {
-        "fecha": fecha,
-        "responsable": responsable,
-        "valor": valor,
+        "initialDate": initialDate,
+        "responsible": responsible,
+        "value": value,
         "centroEducativo": centroEducativo,
-        "tipo": tipo
+        "type": type
       };
 }
 
 class Pase extends MovimientoDeTrayectoAcademico {
   Pase(
-      {required super.fecha,
-      required super.responsable,
-      required super.valor,
-      required super.fechaCaducidadRegularidad,
-      super.tipo = MovementTypes.pase});
+      {required super.initialDate,
+      required super.responsible,
+      required super.value,
+      required super.expirationDate,
+      super.type = MovementTypes.pase});
 }
 
 class ComienzoDeCursado extends MovimientoDeTrayectoAcademico {
   ComienzoDeCursado(
-      {required super.fecha,
-      required super.responsable,
-      required super.valor,
-      required super.fechaCaducidadRegularidad,
-      super.tipo = MovementTypes.comienzoCursado});
+      {required super.initialDate,
+      required super.responsible,
+      required super.value,
+      required super.expirationDate,
+      super.type = MovementTypes.comienzoCursado});
 }
 
 class Regularidad extends MovimientoDeTrayectoAcademico {
   String cursado;
   Regularidad(
-      {required super.fecha,
-      required super.responsable,
-      required super.valor,
-      required super.fechaCaducidadRegularidad,
+      {required super.initialDate,
+      required super.responsible,
+      required super.value,
+      required super.expirationDate,
       required this.cursado,
-      super.tipo = MovementTypes.regularidad});
+      super.type = MovementTypes.regularidad});
   factory Regularidad.fromJson(Map<String, dynamic> json) => Regularidad(
-      fecha: json["fecha"],
-      responsable: json["responsable"],
-      valor: json["valor"],
-      fechaCaducidadRegularidad: json["fechaCaducidadMateria"],
+      initialDate: json["initialDate"],
+      responsible: json["responsible"],
+      value: json["value"],
+      expirationDate: json["fechaCaducidadMateria"],
       cursado: json["cursado"],
-      tipo: json["tipo"]);
+      type: json["type"]);
   @override
   Map<String, dynamic> toJson() => {
-        "fecha": fecha,
-        "responsable": responsable,
-        "valor": valor,
+        "initialDate": initialDate,
+        "responsible": responsible,
+        "value": value,
         "cursado": cursado,
-        "tipo": tipo
+        "type": type
       };
 }
 
 class AcreditacionDirecta extends MovimientoDeTrayectoAcademico {
   AcreditacionDirecta(
-      {required super.fecha,
-      required super.responsable,
-      required super.valor,
-      required super.fechaCaducidadRegularidad,
-      super.tipo = MovementTypes.acreditacionDirecta});
+      {required super.initialDate,
+      required super.responsible,
+      required super.value,
+      required super.expirationDate,
+      super.type = MovementTypes.acreditacionDirecta});
 }
 
 class AcreditacionEnMesaFinal extends MovimientoDeTrayectoAcademico {
   AcreditacionEnMesaFinal(
-      {required super.fecha,
-      required super.responsable,
-      required super.valor,
-      required super.fechaCaducidadRegularidad,
-      super.tipo = MovementTypes.acreditacionEnMesaFinal});
+      {required super.initialDate,
+      required super.responsible,
+      required super.value,
+      required super.expirationDate,
+      super.type = MovementTypes.acreditacionEnMesaFinal});
 }

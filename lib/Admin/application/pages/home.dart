@@ -17,7 +17,8 @@ class Home extends ConsumerWidget {
           data: (data) => Center(
                   child: Column(children: [
                 ProfileStudent(data.student),
-                AssignatureList(getProductData)
+                // TODO algo que me permita escoger entre los Student Record
+                SubjectList(getProductData, data.student.user)
               ])),
           error: (e, s) => const Center(
                 child: Text("Ups!"),

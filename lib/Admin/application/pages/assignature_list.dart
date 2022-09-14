@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:studentrecord/Admin/application/pages/student_record_page_copy.dart';
+import 'package:studentrecord/Admin/application/pages/student_record_page.dart';
 import 'package:studentrecord/Admin/domain/entities/student_record.dart';
+import 'package:studentrecord/Admin/domain/entities/user.dart';
 
-class AssignatureList extends ConsumerWidget {
+class SubjectList extends ConsumerWidget {
   final FutureProvider<StudentRecord> studentRecord;
-  const AssignatureList(this.studentRecord, {Key? key}) : super(key: key);
+  final IESUser user;
+  const SubjectList(this.studentRecord, this.user, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,13 +21,13 @@ class AssignatureList extends ConsumerWidget {
                 scrollDirection: Axis.vertical,
                 itemCount: data.materias.length,
                 itemBuilder: (context, index) => ListTile(
-                    title: Text(data.materias[index].nombre),
+                    title: Text(data.materias[index].subjectName),
                     onTap: () => {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      StudentRecordPage(index, studentRecord)))
+                                  builder: (context) => StudentRecordPage(
+                                      data.materias[index], user)))
                         })),
           );
         },

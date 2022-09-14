@@ -1,5 +1,5 @@
-import 'package:studentrecord/Admin/domain/entities/materia_de_trayecto_academico.dart';
+import 'package:studentrecord/Admin/domain/entities/subject_student_record.dart';
 
 abstract class IGetAssignature {
-  Future<MateriaDeTrayectoAcademico> getStudentRecord();
+  Future<SubjectStudentRecord> getStudentRecord();
 }
